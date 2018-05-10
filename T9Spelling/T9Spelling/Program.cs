@@ -19,11 +19,18 @@ namespace T9Spelling
             if (args.Length != 2)
             {
                 Console.WriteLine("Please enter input and output file path: <inputfile, outputfile>");
-                Console.WriteLine("Or Enter for Exit");
+                Console.WriteLine("Also, you can set this paths as command line args");
+                Console.WriteLine("Or press Enter for Exit\n");
+                
                 string[] paths = Console.ReadLine().Split(',');
 
                 if (paths.Length != 2)
+                {
+                    Console.WriteLine("Wrong input. Program will be closed...");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
                     return;
+                }
 
                 inputFilePath = paths[0];
                 outputFilepath = paths[1];
