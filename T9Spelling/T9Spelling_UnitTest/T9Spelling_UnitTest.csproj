@@ -53,6 +53,12 @@
     <Compile Include="CheckT9SpellingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\T9Spelling\T9Spelling.csproj">
+      <Project>{4288285b-2a58-406f-b05f-efbb912e83c1}</Project>
+      <Name>T9Spelling</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

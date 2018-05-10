@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace T9Spelling
 {
 
-    class CheckT9Spelling
+    public class CheckT9Spelling
     {
 
         private static List<string> alphas = new List<string>() {
@@ -65,17 +65,16 @@ namespace T9Spelling
                 nTimes = 1;
                 while (nTimes <= timesLimit && iteAlpha < 26)
                 {
-                    //key_pad[alphas[ite_alpha]] = str(digits) * ntimes;
                     keyPad[alphas[iteAlpha]] = repeatChars(digits.ToString(), nTimes);
-                    nTimes = nTimes + 1;
-                    iteAlpha = iteAlpha + 1;
+                    nTimes += 1;
+                    iteAlpha += 1;
                 }
-                digits = digits + 1;
+                digits += 1;
             }
             keyPad[" "] = "0"; 
         }
 
-        public string get_pattern(string inputStr)
+        public string getPattern(string inputStr)
         {
             if (String.IsNullOrEmpty(inputStr))
                 return String.Empty;

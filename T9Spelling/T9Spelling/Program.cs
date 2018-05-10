@@ -12,46 +12,68 @@ namespace T9Spelling
     {
         static void Main(string[] args)
         {
+            string inputFilePath;
+            string outputFilepath;
+
+            //Parse input 
+            if (args.Length != 2)
+            {
+                Console.WriteLine("Please enter input and output file path: <inputfile, outputfile>");
+                Console.WriteLine("Or Enter for Exit");
+                string[] paths = Console.ReadLine().Split(',');
+
+                if (paths.Length != 2)
+                    return;
+
+                inputFilePath = paths[0];
+                outputFilepath = paths[1];
+            }
+            else
+            {
+                inputFilePath = args[0];
+                outputFilepath = args[1];
+            }
+
+            convertFile(inputFilePath, outputFilepath);
+            //convertFile(@"h:\Downloads\C-small-practice.in", @"h:\Downloads\C-small-practice.out");
+            //convertFile(@"h:\Downloads\C-large-practice.in", @"h:\Downloads\C-large-practice.out");
+
+        }
+
+        static void convertFile(string inputFilePath, string outputFilePath)
+        {
             List<string> result = new List<string>();
 
             CheckT9Spelling checkSpelling = new CheckT9Spelling();
             checkSpelling.buildDictionary();
 
-            //using (StreamReader fs = new StreamReader(@"h:\Downloads\C-small-practice.in"))
-            using (StreamReader fs = new StreamReader(@"h:\Downloads\C-large-practice.in"))
+            using (StreamReader fs = new StreamReader(inputFilePath))
             {
                 int lineCount = Int32.Parse(fs.ReadLine());
                 int lineNumber = 1;
 
-                //Skip empty line
-                //fs.ReadLine();
-
                 while (true)
                 {
-                    // Читаем строку из файла во временную переменную.
+                    // Read line from file into temporary variable
                     string temp = fs.ReadLine();
 
-                    // Если достигнут конец входящего файла, прерываем считывание.
+                    // leave loop if reached end of file
                     if (temp == null)
                         break;
 
-                    //Проверка строки и добавление в итоговый список
-                    result.Add(String.Format("Case #{0}: {1}", lineNumber, checkSpelling.get_pattern(temp)));
+                    //Convert line and add it to result list
+                    result.Add(String.Format("Case #{0}: {1}", lineNumber, checkSpelling.getPattern(temp)));
 
                     lineNumber++;
                 }
             }
 
-            //Сохраняем результат в выходной файл
-            //using (TextWriter tw = new StreamWriter(@"h:\Downloads\C-small-practice.out"))
-            using (TextWriter tw = new StreamWriter(@"h:\Downloads\C-large-practice.out"))
+            //Store result to output file
+            using (TextWriter tw = new StreamWriter(outputFilePath))
             {
                 foreach (String s in result)
                     tw.WriteLine(s);
             }
-
-            // Выводим на экран.
-            //Console.WriteLine(text);
         }
 
     }
